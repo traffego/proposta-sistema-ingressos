@@ -1,0 +1,30 @@
+Dalva, bom dia! Tudo bem?
+
+Conforme conversamos, segue algumas premissas do nosso sistema de inscrições. Nosso objetivo principal é contar com uma plataforma reutilizável e modular, que sirva não apenas para o Congresso 2027, mas que possa ser reaproveitada em futuros eventos da Federação, bastando alterar as informações internas (como data, local, valores e identidade visual de cada evento).
+
+Para que possa preparar o orçamento com precisão, detalhei abaixo o que consideramos essencial para a nossa operação:
+
+Estrutura Modular por Evento: A possibilidade de criar e duplicar eventos facilmente, configurando blocos de informações personalizáveis para cada encontro (ex: Salão Principal, Congresso da Juventude, etc.).
+‌
+
+Tipos de Inscrição Flexíveis: O sistema precisa permitir a segmentação dos públicos (ex: Adulto, Criança, Jovem/Juventude), com aplicação de regras ou valores específicos para cada categoria.
+‌
+
+Modalidades de Pagamento e Apoio: Opção de configurar diferentes tipos de contribuição no momento da inscrição, como a inscrição individual padrão e a modalidade de inscrição solidária.
+‌
+
+Adicionais de Consumo / Refeições: Um campo opcional dentro da inscrição para que o participante possa adquirir vales ou registrar opções de alimentação (como almoço, janta ou lanche), caso o evento ofereça.
+‌
+
+Gestão de Pagamentos: Integração descomplicada com meios de pagamento usuais (cartão, Pix, boleto) para confirmação automática das vagas.
+‌
+
+Nota sobre assentos: Conforme já alinhado por vocês no documento, não utilizaremos marcação ou escolha de assentos numerados para o Congresso 2027, portanto essa função pode ser desconsiderada por enquanto, mas é uma opção possível para outros eventos.
+
+
+
+Conseguimos o documento de requisitos do banco, que é o Sicredi. Segue o arquivo em anexo para a análise da equipe técnica de vocês.
+
+Pelo que consta no material, o Sicredi trabalha com três modelos de conexão para o e-commerce (Gateway de Pagamentos, Integrador de Pagamentos ou Conexão Direta - IPG). 
+
+Como a preferência da Federação é utilizar a estrutura deles, peço que a equipe de vocês avalie o documento e nos oriente sobre qual desses modelos é o mais indicado e compatível com o sistema que será desenvolvido pela USE, considerando a nossa realidade de eventos.

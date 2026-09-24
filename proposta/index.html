@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROPOSTA COMERCIAL — Sistema de Inscrições e Gestão de Eventos | USE Tecnologias & Federação</title>
+    <meta property="og:title" content="PROPOSTA COMERCIAL — Sistema de Inscrições e Gestão de Eventos">
+    <meta property="og:description" content="Plataforma modular e reutilizável de inscrições para o Congresso 2027 e eventos da Federação, com integração de pagamento Sicredi.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .mobile-only { display: none !important; }
+        .desktop-only { display: block !important; }
+        .mobile-module-card {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.85rem;
+            background-color: var(--card);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 0.65rem;
+            box-sizing: border-box;
+        }
+        .mobile-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .mobile-card-header h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--foreground);
+        }
+        .mobile-module-card p {
+            font-size: 0.75rem;
+            color: var(--muted-foreground);
+            margin: 0;
+            line-height: 1.4;
+        }
+        .sicredi-analysis-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .sicredi-card {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            background-color: var(--card);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .sicredi-card.recommended {
+            border-color: #22c55e;
+            background: linear-gradient(180deg, rgba(34, 197, 94, 0.05) 0%, var(--card) 100%);
+        }
+        .sicredi-card h4 {
+            margin: 0;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .sicredi-card p {
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
+            margin: 0;
+            line-height: 1.45;
+        }
+        .sicredi-card ul {
+            margin: 0.25rem 0 0 0;
+            padding-left: 1.2rem;
+            font-size: 0.78rem;
+            color: var(--muted-foreground);
+        }
+        .sicredi-card ul li {
+            margin-bottom: 0.25rem;
+        }
+        @media (max-width: 768px) {
+            .desktop-only { display: none !important; }
+            .mobile-only { display: block !important; }
+        }
+        @media (max-width: 600px) {
+            header {
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 0.75rem !important;
+                padding: 1rem 0 !important;
+            }
+            .profile-header {
+                align-items: center !important;
+                gap: 0.75rem !important;
+                max-width: calc(100% - 85px) !important;
+            }
+            .profile-avatar {
+                width: 2.75rem !important;
+                height: 2.75rem !important;
+                flex-shrink: 0;
+            }
+            .profile-name { font-size: 0.88rem !important; }
+            .profile-specialties { font-size: 0.65rem !important; line-height: 1.25 !important; }
+            .client-logo img { height: 2.2rem !important; max-width: 75px; object-fit: contain; }
+        }
+    </style>
+</head>
+<body class="dark">
+
+    <div class="container animate-fade-in">
+        <!-- Top Actions -->
+        <div class="top-actions">
+            <button class="btn btn-ghost" onclick="window.print()" title="Imprimir" aria-label="Imprimir">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8" rx="1"></rect>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Header -->
+        <header style="justify-content: space-between; gap: 1rem;">
+            <div class="profile-header">
+                <img src="./avatar.png" alt="Jônathas Quintanilha (Garré)" class="profile-avatar">
+                <div class="profile-info">
+                    <div class="profile-name">Jônathas Quintanilha (Garré)</div>
+                    <div class="profile-specialties">Desenvolvedor de Sistemas | IA, RAG & LLMs | Automações | +15 anos de experiência</div>
+                </div>
+            </div>
+            <div class="client-logo" style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
+                <img src="./logo_cliente.png" alt="USE Tecnologias" style="height: 2.75rem; object-fit: contain;">
+            </div>
+        </header>
+
+        <!-- Document Hero -->
+        <div class="doc-hero">
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+                <span class="badge">Proposta Comercial & Técnica</span>
+                <span class="badge" style="background-color: rgba(59, 130, 246, 0.1); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3);">Plataforma Multievento</span>
+                <span class="badge" style="background-color: rgba(34, 197, 94, 0.1); color: #4ade80; border-color: rgba(34, 197, 94, 0.3);">E-Commerce Sicredi</span>
+            </div>
+            <h1>Plataforma Modular de Inscrições & Gestão de Eventos</h1>
+            <p class="lead">Solução web corporativa, reutilizável e escalável para venda de ingressos, controle de lotes, segmentação de públicos, gestão de alimentação e integração financeira homologada com o Sicredi (Congresso 2027 e futuros eventos da Federação).</p>
+            
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <span class="meta-label">Cliente / Solicitante</span>
+                    <span class="meta-val">USE Tecnologias / Dalva</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Entidade Beneficiária</span>
+                    <span class="meta-val">Federação Espírita (Congresso 2027)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Versão</span>
+                    <span class="meta-val">1.0</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Validade</span>
+                    <span class="meta-val">15 dias</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. Módulos do Sistema -->
+        <section id="escopo">
+            <h2><span>01.</span> Módulos & Entregáveis do Sistema</h2>
+            <p style="color: var(--muted-foreground); margin-bottom: 1rem;">Estrutura 100% modular projetada para permitir que a Federação crie e replique eventos livremente, personalizando lotes, públicos e informações:</p>
+
+            <!-- Desktop Table -->
+            <div class="table-wrapper desktop-only">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%">#</th>
+                            <th style="width: 26%">Módulo / Entregável</th>
+                            <th>Funcionalidades & Detalhamento Técnico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td style="font-weight: 600;">Arquitetura Multievento & Clonagem</td>
+                            <td>Painel para criação, duplicação e gestão de eventos independentes. Permite configurar datas, local, capacidade, descrição, banners, identidade visual e subespaços (ex: Salão Principal, Congresso da Juventude, etc.) com autonomia total para futuros eventos sem alterar código.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td style="font-weight: 600;">Segmentação Flexível de Públicos & Lotes</td>
+                            <td>Cadastro de categorias personalizadas de inscritos (Adulto, Jovem/Juventude, Criança, etc.) com precificação, datas de virada de lote e limites de vagas específicos por categoria.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td style="font-weight: 600;">Modalidades de Apoio & Inscrição Solidária</td>
+                            <td>Flexibilidade para o participante selecionar a Inscrição Padrão ou aderir à Inscrição Solidária (com valor de contribuição adicional/apoio configurável pelo administrador).</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td style="font-weight: 600;">Gestão de Consumo & Refeições</td>
+                            <td>Módulo opcional de adicionais no checkout para aquisição antecipada de vales de alimentação (almoço, jantar, lanche). Geração de vouchers/QR Codes específicos para controle de consumo no local do evento.</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td style="font-weight: 600;">Motor de Checkout & Integração Sicredi</td>
+                            <td>Integração nativa com a infraestrutura de pagamentos Sicredi (Pix Dinâmico com liquidação instantânea, Cartão de Crédito e Boleto Bancário). Confirmação automática de inscrições via webhooks seguros.</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td style="font-weight: 600;">Gestão de Ingressos, Vouchers & Check-in</td>
+                            <td>Geração automatizada de ingressos e vouchers com QR Code criptografado. Tela administrativa otimizada para leitura de QR Code no credenciamento/portaria e controle de entrega de refeições.</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td style="font-weight: 600;">Painel Administrativo & Relatórios</td>
+                            <td>Dashboard em tempo real com métricas financeiras, quantitativo de inscritos por categoria, relatório de refeições contratadas e exportação completa em Excel/CSV.</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td style="font-weight: 600;">Arquitetura Preparada para Assentos Numerados</td>
+                            <td>Modelagem desacoplada que permite futura ativação de mapa de assentos numerados em eventos que exijam essa funcionalidade (mantida desabilitada para o Congresso 2027 conforme especificado).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile Cards -->
+            <div class="mobile-only" style="margin-top: 1rem;">
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">1</span>
+                        <h4>Arquitetura Multievento & Clonagem</h4>
+                    </div>
+                    <p>Criação e duplicação de eventos, subespaços (Salão Principal, Juventude), lotes e identidade visual sem dependência técnica.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">2</span>
+                        <h4>Segmentação Flexível de Públicos</h4>
+                    </div>
+                    <p>Categorias diferenciadas (Adulto, Jovem, Criança) com regras e valores específicos por lote.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">3</span>
+                        <h4>Inscrição Solidária & Apoio</h4>
+                    </div>
+                    <p>Modalidades de contribuição padrão e solidária no fluxo de pagamento.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">4</span>
+                        <h4>Adicionais de Consumo & Refeições</h4>
+                    </div>
+                    <p>Venda opcional de vales-refeição (almoço, jantar, lanche) com emissão de vouchers específicos.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">5</span>
+                        <h4>Checkout & Integração Sicredi</h4>
+                    </div>
+                    <p>Pix Dinâmico instantâneo, Cartão de Crédito e Boleto com baixa automática de vagas.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">6</span>
+                        <h4>QR Code, Vouchers & Credenciamento</h4>
+                    </div>
+                    <p>Ingressos digitais com QR Code seguro e interface de validação rápida para a recepção.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">7</span>
+                        <h4>Dashboard & Relatórios Financeiros</h4>
+                    </div>
+                    <p>Métricas em tempo real de inscritos, arrecadação, refeições e exportação para Excel.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">8</span>
+                        <h4>Suporte Futuro a Assentos</h4>
+                    </div>
+                    <p>Base pronta para habilitar mapa de assentos numerados em edições futuras.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Complexidade Técnica, Análise Sicredi & Prevenção de Riscos -->
+        <section id="complexidade" style="background: radial-gradient(circle at top right, rgba(239, 68, 68, 0.06) 0%, rgba(24, 24, 27, 0.45) 40%, rgba(9, 9, 11, 0) 100%); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: calc(var(--radius) * 1.5); padding: 1.5rem; margin-top: 1.75rem; margin-bottom: 2rem; box-shadow: 0 4px 24px -6px rgba(0, 0, 0, 0.5);">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <h2 style="margin: 0;"><span>02.</span> Análise Técnica Sicredi & Prevenção de Riscos</h2>
+                <span class="badge" style="background: rgba(239, 68, 68, 0.12); color: #f87171; border-color: rgba(239, 68, 68, 0.35); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;">Zona Crítica de Atenção</span>
+            </div>
+            <p style="color: var(--muted-foreground); margin-bottom: 1.25rem;">Avaliação detalhada dos 3 modelos do documento de requisitos do Sicredi e medidas de segurança arquitetural para proteger as operações de bilheteria:</p>
+
+            <!-- Comparativo dos Modelos Sicredi -->
+            <div class="sicredi-analysis-box">
+                <div class="sicredi-card">
+                    <h4>Modelo 1: Integrador de Pagamento</h4>
+                    <p>Plataformas completas de terceiros (ex: VTEX, Galax Pay, Yapay, AZPay).</p>
+                    <ul>
+                        <li><strong>Vantagem:</strong> Antifraude e conciliação embutidos.</li>
+                        <li><strong>Desvantagem:</strong> Custo mensal recorrente e taxas adicionais por transação cobradas pelo integrador.</li>
+                        <li><strong>Veredito:</strong> Custo operacional elevado e desnecessário para o porte de eventos da Federação.</li>
+                    </ul>
+                </div>
+
+                <div class="sicredi-card recommended">
+                    <h4>
+                        <span>Modelo 2: Gateway Homologado / Conexão Direta (IPG)</span>
+                        <span class="badge" style="background: rgba(34, 197, 94, 0.2); color: #4ade80; border-color: rgba(34, 197, 94, 0.4); font-size: 0.65rem; font-weight: 800;">RECOMENDADO</span>
+                    </h4>
+                    <p>Conexão direta com a API Sicredi ou via Gateway Homologado (iPag / PayZen).</p>
+                    <ul>
+                        <li><strong>Vantagem:</strong> Checkout 100% transparente na identidade visual da Federação, sem intermediários caros, menor custo de MDR.</li>
+                        <li><strong>Controle Total:</strong> Webhook de conciliação Pix imediato e confirmação instantânea de vagas.</li>
+                        <li><strong>Recomendação:</strong> Modelo mais eficiente, econômico e compatível com o sistema da USE.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Riscos Mitigados -->
+            <div class="step-list" style="margin-top: 1.25rem;">
+                <div class="step-item" style="border: 1px solid rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.05); border-left: 3px solid #ef4444; border-radius: var(--radius); padding: 1rem;">
+                    <span class="step-num" style="background: rgba(239, 68, 68, 0.2); color: #f87171; border-color: rgba(239, 68, 68, 0.5); font-weight: 800;">!</span>
+                    <div class="step-content" style="width: 100%;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.3rem;">
+                            <h4 style="color: #fca5a5; font-weight: 700; margin-bottom: 0;">Prevenção de Overbooking & Concorrência de Vagas</h4>
+                            <span class="badge" style="background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); font-size: 0.62rem; font-weight: 700;">PRIORIDADE ALTA</span>
+                        </div>
+                        <p style="color: #e4e4e7; line-height: 1.45;">Em momentos de abertura de lotes com alto volume de acessos simultâneos, o sistema aplicará <strong>bloqueio atômico de vagas com reserva temporária</strong> (hold por 15 minutos enquanto o Pix/Cartão é processado), eliminando o risco de venda excedente acima da lotação máxima permitida.</p>
+                    </div>
+                </div>
+
+                <div class="step-item" style="border: 1px solid rgba(59, 130, 246, 0.3); background: rgba(59, 130, 246, 0.04); border-left: 3px solid #3b82f6; border-radius: var(--radius); padding: 1rem; margin-top: 0.75rem;">
+                    <span class="step-num" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; border-color: rgba(59, 130, 246, 0.5); font-weight: 800;">✓</span>
+                    <div class="step-content" style="width: 100%;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.3rem;">
+                            <h4 style="color: #93c5fd; font-weight: 700; margin-bottom: 0;">Conformidade com os 10 Requisitos Obrigatórios do Sicredi</h4>
+                            <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.4); font-size: 0.62rem; font-weight: 700;">COMPLIANCE BANCÁRIO</span>
+                        </div>
+                        <p style="color: #e4e4e7; line-height: 1.45;">Implementação nativa de todas as exigências do Sicredi: ambiente seguro SSL, políticas de privacidade e cancelamento/reembolso visíveis, exibição de CNPJ/endereço, exposição de bandeiras aceitas e integração de solução antifraude para cartões.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Fluxo Operacional -->
+        <section id="operacoes">
+            <h2><span>03.</span> Fluxo Operacional da Solução</h2>
+            <p style="color: var(--muted-foreground); margin-bottom: 1.25rem;">Jornada ponta a ponta desde o cadastro do evento até o credenciamento presencial no dia do encontro:</p>
+            
+            <div class="step-list">
+                <div class="step-item">
+                    <span class="step-num">1</span>
+                    <div class="step-content">
+                        <h4>Parametrização do Evento & Lotes</h4>
+                        <p>O administrador cadastra ou clona o evento na plataforma, define informações do local, datas, categorias de inscritos (Adulto/Jovem/Criança), opções de alimentação e ativa as formas de pagamento Sicredi.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">2</span>
+                    <div class="step-content">
+                        <h4>Inscrição & Seleção de Adicionais</h4>
+                        <p>O participante escolhe a categoria de inscrição, seleciona a modalidade (Padrão ou Solidária), inclui adicionais de refeição (almoço/jantar/lanche) e preenche os dados cadastrais.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">3</span>
+                    <div class="step-content">
+                        <h4>Processamento Sicredi & Baixa Automática</h4>
+                        <p>O participante efetua o pagamento via Pix (com leitura de QR Code dinâmico instantâneo) ou Cartão/Boleto. O webhook do Sicredi confirma a transação em segundos e atualiza o inventário de vagas.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">4</span>
+                    <div class="step-content">
+                        <h4>Emissão de Ingressos & Vouchers Digitais</h4>
+                        <p>O sistema gera os ingressos individuais e vouchers de refeição com QR Code criptografado exclusivo, enviando automaticamente a confirmação por e-mail ao inscrito.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <span class="step-num">5</span>
+                    <div class="step-content">
+                        <h4>Credenciamento (Check-in) & Relatórios em Tempo Real</h4>
+                        <p>No dia do evento, a equipe da portaria utiliza a interface web em celulares/tablets para validar o QR Code, liberando o acesso e a retirada de refeições com registro de histórico em tempo real.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Stack Tecnológica -->
+        <section id="tecnologias">
+            <h2><span>04.</span> Stack de Tecnologia</h2>
+            <div class="tech-pills">
+                <span class="tech-badge">Next.js / React (Frontend Responsivo & Mobile First)</span>
+                <span class="tech-badge">Node.js & TypeScript (Backend Serverless)</span>
+                <span class="tech-badge">Supabase (PostgreSQL, Auth & Row Level Security)</span>
+                <span class="tech-badge">API Sicredi E-Commerce (IPG / Gateway & Webhooks Pix)</span>
+                <span class="tech-badge">Tailwind CSS & Shadcn UI (Interface Dark/Clean)</span>
+                <span class="tech-badge">QR Code Engine & Validador de Credenciamento</span>
+                <span class="tech-badge">Exportação de Relatórios (Excel / CSV / PDF)</span>
+                <span class="tech-badge">Camada de Segurança Antifraude & LGPD</span>
+            </div>
+        </section>
+
+        <!-- 5. Etapas de Desenvolvimento -->
+        <section id="cronograma">
+            <h2><span>05.</span> Etapas de Desenvolvimento & Cronograma</h2>
+            
+            <div class="table-wrapper desktop-only">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Etapa</th>
+                            <th>Escopo Técnico Principal</th>
+                            <th style="width: 18%">Prazo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600;">1. Modelagem & Motor Multievento</td>
+                            <td>Estruturação de banco de dados para suportar múltiplos eventos, clonagem de edições, subespaços e hierarquia de lotes.</td>
+                            <td>4 dias úteis</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">2. Integração E-Commerce Sicredi</td>
+                            <td>Desenvolvimento da camada de checkout, comunicação via API Sicredi (Pix Dinâmico, Cartão, Boleto), Webhooks e travas de segurança.</td>
+                            <td>5 dias úteis</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">3. Fluxo de Inscrições & Refeições</td>
+                            <td>Interface pública para escolha de categorias (Adulto/Jovem/Criança), Inscrição Solidária e adicionais de refeições.</td>
+                            <td>4 dias úteis</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">4. Painel de Gestão & Relatórios</td>
+                            <td>Dashboard de administração, controle de inscritos, conciliação financeira de lotes e exportação para Excel.</td>
+                            <td>4 dias úteis</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">5. Módulo de Vouchers & Check-in QR</td>
+                            <td>Geração de ingressos/vouchers com QR Code e interface ágil para credenciamento e validação de refeições na portaria.</td>
+                            <td>3 dias úteis</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">6. Homologação Sicredi, QA & Deploy</td>
+                            <td>Testes de concorrência/carga, validação dos requisitos do Sicredi, homologação técnica e publicação oficial.</td>
+                            <td>4 dias úteis</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile Cards for Schedule -->
+            <div class="mobile-only" style="margin-top: 1rem;">
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">1</span>
+                        <h4>1. Modelagem & Multievento (4 dias)</h4>
+                    </div>
+                    <p>Banco de dados multievento, clonagem de edições e controle de lotes.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">2</span>
+                        <h4>2. Integração Sicredi (5 dias)</h4>
+                    </div>
+                    <p>Checkout Pix, Cartão, Boleto e Webhooks de conciliação automática.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">3</span>
+                        <h4>3. Inscrições & Refeições (4 dias)</h4>
+                    </div>
+                    <p>Interface de compra com públicos, modalidade solidária e vales-alimentação.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">4</span>
+                        <h4>4. Painel & Relatórios (4 dias)</h4>
+                    </div>
+                    <p>Métricas financeiras, gestão de lotes e exportação de dados em tempo real.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">5</span>
+                        <h4>5. QR Code & Check-in (3 dias)</h4>
+                    </div>
+                    <p>Ingressos digitais e sistema de credenciamento presencial via leitor QR.</p>
+                </div>
+                <div class="mobile-module-card">
+                    <div class="mobile-card-header">
+                        <span class="step-num">6</span>
+                        <h4>6. Homologação & Deploy (4 dias)</h4>
+                    </div>
+                    <p>Homologação Sicredi, testes de carga, auditoria de segurança e deploy final.</p>
+                </div>
+            </div>
+
+            <p class="text-muted" style="font-size: 0.8rem; text-align: right; margin-top: 0.5rem;">Prazo estimado total: <strong>24 dias úteis</strong> (~4 a 5 semanas de engenharia dedicada).</p>
+        </section>
+
+        <!-- 6. Investimento -->
+        <section id="investimento">
+            <h2><span>06.</span> Investimento & Proposta Comercial</h2>
+            
+            <div class="calc-box">
+                <div class="calc-inputs">
+                    <div class="calc-title">Escopo Integral Incluso</div>
+                    
+                    <div class="calc-option" style="cursor: default;">
+                        <input type="checkbox" checked disabled>
+                        <span>Plataforma Multievento & Reutilizável<br><span class="text-muted" style="font-size: 0.7rem;">Criação e duplicação ilimitada de eventos futuros da Federação.</span></span>
+                    </div>
+                    
+                    <div class="calc-option" style="cursor: default;">
+                        <input type="checkbox" checked disabled>
+                        <span>Integração Homologada com Banco Sicredi<br><span class="text-muted" style="font-size: 0.7rem;">Pix Dinâmico, Cartão de Crédito, Boleto e Webhooks de baixa automática.</span></span>
+                    </div>
+
+                    <div class="calc-option" style="cursor: default;">
+                        <input type="checkbox" checked disabled>
+                        <span>Módulos de Públicos, Refeições & Solidária<br><span class="text-muted" style="font-size: 0.7rem;">Segmentação por categorias, vales de alimentação e apoio solidário.</span></span>
+                    </div>
+
+                    <div class="calc-option" style="cursor: default;">
+                        <input type="checkbox" checked disabled>
+                        <span>Sistema de Vouchers, QR Code & Credenciamento<br><span class="text-muted" style="font-size: 0.7rem;">Ingressos digitais e leitor web para validação na recepção do evento.</span></span>
+                    </div>
+
+                    <div class="calc-option" style="cursor: default;">
+                        <input type="checkbox" checked disabled>
+                        <span>Garantia & Suporte Operacional no Evento Piloto<br><span class="text-muted" style="font-size: 0.7rem;">Acompanhamento técnico dedicado durante a operação do Congresso.</span></span>
+                    </div>
+                </div>
+
+                <div class="calc-result">
+                    <div>
+                        <span class="badge" style="background-color: var(--muted); border-color: var(--border);">Orçamento Fechado</span>
+                        <div class="price-display">
+                            <span class="price-label">Valor do Projeto</span>
+                            <div style="display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap;">
+                                <span style="font-size: 1.65rem; color: var(--muted-foreground); text-decoration: line-through; font-weight: 700; opacity: 0.85;">R$ 6.800</span>
+                                <span class="price-num" style="color: #22c55e; font-size: 2.1rem;">R$ 6.200</span>
+                                <span style="font-size: 0.9rem; font-weight: 600; color: #22c55e;">à vista</span>
+                            </div>
+                        </div>
+                        
+                        <div class="calc-rows">
+                            <div class="calc-row">
+                                <span>Opção 1 — À Vista (PIX c/ Desconto):</span>
+                                <span style="font-weight: 700; color: #22c55e;">R$ 6.200</span>
+                            </div>
+                            <div class="calc-row" style="border-top: 1px dashed var(--border); padding-top: 0.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.35rem;">
+                                <span class="text-muted" style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase;">Opção 2 — Faturamento em 2x (Total: R$ 6.800):</span>
+                                <div style="display: flex; justify-content: space-between; width: 100%; font-size: 0.8rem;">
+                                    <span>• 50% Sinal (no início do desenvolvimento):</span>
+                                    <span style="font-weight: 600; color: var(--foreground);">R$ 3.400</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; width: 100%; font-size: 0.8rem;">
+                                    <span>• 50% Entrega (na homologação final com Sicredi):</span>
+                                    <span style="font-weight: 600; color: var(--foreground);">R$ 3.400</span>
+                                </div>
+                            </div>
+                            <div class="calc-row" style="margin-top: 0.35rem; padding: 0.55rem 0.75rem; border: 1px solid var(--border); border-radius: var(--radius); background-color: var(--card); align-items: center;">
+                                <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.8rem;">
+                                    <svg width="22" height="15" viewBox="0 0 24 16" fill="none" style="flex-shrink: 0;">
+                                        <rect width="24" height="16" rx="3" fill="#18181b"/>
+                                        <circle cx="9" cy="8" r="5" fill="#EB001B"/>
+                                        <circle cx="15" cy="8" r="5" fill="#F79E1B" fill-opacity="0.9"/>
+                                    </svg>
+                                    Cartão de Crédito:
+                                </span>
+                                <span style="color: var(--foreground); font-weight: 700; font-size: 0.85rem;">R$ 6.800 <span style="font-weight: 500; font-size: 0.75rem;" class="text-muted">em até 12x</span></span>
+                            </div>
+                            <div style="font-size: 0.7rem; opacity: 0.7; text-align: right; margin-top: 0.15rem;">
+                                * Parcelamento sujeito às taxas da operadora.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-primary" style="width: 100%; margin-bottom: 0.5rem;" id="submit-proposal-btn">APROVAR PROPOSTA</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Condições Gerais -->
+        <section id="condicoes">
+            <h2><span>07.</span> Condições Gerais & Garantias</h2>
+            <div class="cond-list">
+                <div class="cond-item">
+                    <h4>Forma de Pagamento</h4>
+                    <p>• <strong>À Vista (PIX)</strong>: R$ 6.200 com desconto.<br>
+                    • <strong>Faturamento 2x (50/50)</strong>: R$ 3.400 no sinal e R$ 3.400 na homologação final.<br>
+                    • <strong>Cartão de Crédito</strong>: R$ 6.800 parcelado em até 12x.</p>
+                </div>
+                <div class="cond-item" style="border: 1.5px solid rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.05);">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem;">
+                        <h4 style="margin-bottom: 0; color: #93c5fd;">Garantia & Suporte Operacional</h4>
+                        <span style="font-size: 0.65rem; background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.35); padding: 0.1rem 0.45rem; border-radius: 9999px; font-weight: 700; text-transform: uppercase;">60 Dias + Evento</span>
+                    </div>
+                    <p>Garantia técnica de 60 dias após a entrega e acompanhamento de plantão durante os dias do Congresso 2027 para suporte operacional e monitoramento de credenciamento.</p>
+                </div>
+                <div class="cond-item">
+                    <h4>Propriedade Intelectual & Reutilização</h4>
+                    <p>Cessão integral do código-fonte e base de dados para a USE / Federação, garantindo autonomia irrestrita para hospedar, reaproveitar e criar eventos ilimitados sem royalties.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <h3>Pronto para Iniciar o Projeto?</h3>
+            <p>Clique abaixo para oficializar a contratação ou esclarecer dúvidas técnicas sobre o credenciamento Sicredi.</p>
+            <div class="footer-actions">
+                <button class="btn btn-primary" id="footer-accept-btn">APROVAR PROPOSTA</button>
+                <button class="btn btn-outline" onclick="window.print()">Salvar PDF</button>
+            </div>
+            <div class="credits">
+                // 2026 USE Tecnologias & Federação Espírita • Proposta Comercial & Técnica.
+            </div>
+        </footer>
+    </div>
+
+    <!-- Mobile Floating Dock -->
+    <div class="mobile-dock aggressive-shadow" id="mobile-dock">
+        <a href="#escopo" class="dock-btn" title="Módulos">Mód</a>
+        <a href="#complexidade" class="dock-btn" title="Sicredi">Risco</a>
+        <a href="#operacoes" class="dock-btn" title="Fluxos">Fluxo</a>
+        <a href="#tecnologias" class="dock-btn" title="Tecnologia">Tech</a>
+        <a href="#cronograma" class="dock-btn" title="Etapas">Etapas</a>
+        <a href="#investimento" class="dock-btn" title="Orçamento">Orçam</a>
+    </div>
+
+    <!-- JS Logic -->
+    <script>
+        const submitBtn = document.getElementById('submit-proposal-btn');
+        const acceptBtn = document.getElementById('footer-accept-btn');
+
+        function sendWhatsapp() {
+            const message = `Olá, Jônathas. Nós aprovamos a proposta comercial do Sistema Modular de Inscrições & Integração Sicredi (USE / Federação). Quais são os próximos passos para darmos início?`;
+            window.open(`https://wa.me/5521982188560?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        if (submitBtn) submitBtn.addEventListener('click', sendWhatsapp);
+        if (acceptBtn) acceptBtn.addEventListener('click', sendWhatsapp);
+
+        // Mobile Dock Scrollspy Highlight & Aggressive Shadow Removal
+        const sections = document.querySelectorAll('section');
+        const dockBtns = document.querySelectorAll('.mobile-dock .dock-btn');
+        const mobileDock = document.getElementById('mobile-dock');
+
+        function removeAggressiveShadow() {
+            if (mobileDock) {
+                mobileDock.classList.remove('aggressive-shadow');
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 15) {
+                removeAggressiveShadow();
+            }
+        });
+
+        dockBtns.forEach(btn => {
+            btn.addEventListener('click', removeAggressiveShadow);
+        });
+
+        if ('IntersectionObserver' in window) {
+            const spyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const activeId = entry.target.getAttribute('id');
+                        dockBtns.forEach(btn => {
+                            btn.classList.remove('active');
+                            if (btn.getAttribute('href') === `#${activeId}`) {
+                                btn.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '-20% 0px -60% 0px'
+            });
+
+            sections.forEach(sec => spyObserver.observe(sec));
+        }
+    </script>
+</body>
+</html>
